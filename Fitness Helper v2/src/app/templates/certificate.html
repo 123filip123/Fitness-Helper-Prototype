@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if not request.user.profile.certified %}
+<div class="card mb-3" style="max-width: 540px; margin-left: auto;
+margin-right: auto; margin-top: 10%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{% static 'trophy-false.webp' %}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Fitness Helper Certificate</h5>
+          <p class="card-text">The Fitness Helper Certificate is aquired when you successfully answer all quiz questions correctly!</p>
+          <p class="card-text"><small class="text-muted">So far you have {{ request.user.profile.highScore }} correct answers!</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% if request.user.profile.certified == True %}
+<div class="card mb-3" style="max-width: 540px; margin-left: auto;
+margin-right: auto; margin-top: 10%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{% static 'trophy-true.webp' %}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Fitness Helper Certificate</h5>
+          <p class="card-text">Congratulations! You are a certified Fitness Helper user!</p>
+          <p class="card-text"><small class="text-muted">Acquired by: {{ request.user.username }}</small></p>
+          <p class="card-text"><small class="text-muted">Date acquired: {{ request.user.profile.dateAcquired }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+{% endblock %}

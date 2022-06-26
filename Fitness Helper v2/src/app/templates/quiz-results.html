@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div style="margin-left:10%; margin-right:10%; margin-top: 2%; padding-bottom: 20px;">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Quiz results
+      </div>
+      <div class="card-body">
+        {% if correct == 2 %}
+        <h3 class="card-title">Congratulations!</h5>
+        {% endif %}
+        <h5 class="card-title">{{correct}} out of 2 correct</h5>
+        <p class="card-text"></p>
+        {% if not got_certified and correct != 2%}
+        <a href="{% url 'quiz' %}" class="btn btn-primary">Try again</a>
+        {% endif %}
+        {% if request.user.profile.certified  and not got_certified %}
+        <p class="card-text"><small class="text-muted">You are already certified.</small></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if got_certified %}
+  <div class="card" style="width: 18rem; margin-left: auto;
+  margin-right: auto; margin-top: 10px;">
+    <img
+      src="{% static 'trophy-true.webp' %}"
+      class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Congratulations!</h5>
+      <p class="card-text">You just got your Fitness Helper Certification!</p>
+      <a href="{% url 'certificate' %}" class="btn btn-primary">View certificate</a>
+    </div>
+  </div>
+  {% endif %}
+
+  
+
+</div>
+
+
+{% endblock %}
